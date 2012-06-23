@@ -1,6 +1,6 @@
 #
-# Author:: Ian Meyer <ianmmeyer@gmail.com>
-# Copyright:: Copyright (c) 2012, Ian Meyer
+# Author:: Brian Scott <brainscott@gmail.com>
+# Copyright:: Copyright (c) 2012, Brian Scott
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
