@@ -6,7 +6,7 @@ Chef Handler to send metrics to Librato metrics
 
 Description
 
-This is a simple Chef report handler that reports status of a Chef run through Growl.
+This is a simple Chef report handler that reports status of a Chef run through librato.
 
     http://wiki.opscode.com/display/chef/Exception+and+Report+Handlers
 
