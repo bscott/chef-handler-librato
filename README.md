@@ -32,7 +32,7 @@ librato_handler = LibratoReporting.new
 # metric_type is a string that sets the Metrics type in Librato, defaults to counter
 librato_handler.metric_type = "counter"
 
-# Hostname and port of your Graphite server
+# Email and Api_key
 librato_handler.email = "user@domain.com"
 librato_handler.api_key = "667hhff544300096423345"
 
