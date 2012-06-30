@@ -42,13 +42,12 @@ class LibratoReporting < Chef::Handler
 
     Chef::Log.debug("#{gemspec.full_name} loaded as a handler.")
 
-    @l = Librato::Metrics.new
-    @l.authenticate "#{@email}" "#{@api_key}"
+    Librato::Metrics.authenticate "#{@email}", "#{@api_key}"
 
     metrics = Hash.new
     metrics[:updated_resources] = run_status.updated_resources.length
     metrics[:all_resources] = run_status.all_resources.length
-    metrics[:elapsed_time] = run_status.elapsed_time
+    metrics[:elapsed_time] = run_status.elapsed_time.to_i
 
     if run_status.success?
       metrics[:success] = 1
@@ -58,11 +57,14 @@ class LibratoReporting < Chef::Handler
       metrics[:fail] = 1
     end
 
-     metrics.length.each do |librato|
+     
       metrics.each do |metric, value|
-        Chef::Log.debug("#{metric} #{value} #{l.time_now}")
-        @l.submit :"#{metric}" => {:type => :"#{@metric_type}", :value => "#{value}", :source => "#{@source}" }
+        Chef::Log.debug("#{metric} #{value} #{Time.now}")
+        begin
+        Librato::Metrics.submit :"#{metric}" => {:type => :"#{@metric_type}", :value => "#{value}", :source => "#{@source}" }
+        rescue Exception => e
+          puts "#{e}"
+  end
       end
-    end
   end
 end
