@@ -44,7 +44,7 @@ Method 2
 
 Use the chef_handler cookbook by Opscode. Create a recipe with the following:
 
-# Install the `chef-handler-growl` RubyGem during the compile phase
+# Install the `chef-handler-librato` RubyGem during the compile phase
 gem_package "chef-handler-librato" do
   action :nothing
 end.run_action(:install)
@@ -61,7 +61,7 @@ argument_array = [
 ]
 
 chef_handler "LibratoReporting" do
-  source "#{File.join(Gem.all_load_paths.grep(/chef-handler-librato/).first,'chef', 'handler', 'chef_handler_librato.rb')}"
+  source "#{File.join(Gem.all_load_paths.grep(/chef-handler-librato/).first,'chef', 'chef_handler_librato.rb')}"
   arguments argument_array
   action :nothing
 end.run_action(:enable)
