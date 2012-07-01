@@ -1,6 +1,5 @@
 chef-handler-librato
 
-Author - Brian Scott (b@bscott.me)
 ====================
 
 Chef Handler to send metrics to Librato metrics!
@@ -80,5 +79,7 @@ or
 
 
 Patches welcome, just send me a pull request!
+
+Author: Brian Scott (brainscott@gmail.com)
 
 
