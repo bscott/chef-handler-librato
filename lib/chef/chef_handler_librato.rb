@@ -24,7 +24,7 @@ require "chef"
 require "chef/handler"
 
 class LibratoReporting < Chef::Handler
-  attr_writer :metrics_type, :source, :email, :api_key
+  attr_writer :metric_type, :source, :email, :api_key
 
   def initialize(options = {})
     @metric_type = options[:metric_type] || "counter"
