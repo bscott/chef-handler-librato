@@ -1,9 +1,8 @@
-# -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "chef-handler-librato"
-  s.version     = "1.1.5"
+  s.version     = "1.1.6"
   s.authors     = ["Brian Scott"]
   s.email       = ["brainscott@gmail.com"]
   s.homepage    = ""
@@ -18,6 +17,9 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.add_development_dependency "librato-metrics"
-  s.add_runtime_dependency "librato-metrics"
-  s.add_runtime_dependency "chef"
+  s.add_runtime_dependency "chef", '>= 0'
+  s.add_runtime_dependency "aggregate", '>= 0'
+  s.add_runtime_dependency "multi_json", '>= 0'
+  s.add_runtime_dependency "faraday", '>= 0'
+  s.add_runtime_dependency "librato-metrics", '>= 0'
 end
