@@ -1,6 +1,10 @@
 chef-handler-librato
 
 ====================
+#### Build Status
+[![Build Status](https://travis-ci.org/bscott/chef-handler-librato.png?branch=master)](https://travis-ci.org/bscott/chef-handler-librato)
+
+====================
 
 Chef Handler to send metrics to Librato metrics!
 
