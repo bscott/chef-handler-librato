@@ -24,13 +24,13 @@ require "chef"
 require "chef/handler"
 
 class LibratoReporting < Chef::Handler
-  attr_writer :metric_type, :source, :email, :api_key
+  attr_accessor :metric_type, :source, :email, :api_key
 
   def initialize(options = {})
     @metric_type = options[:metric_type] || "counter"
     @source = options[:source] || "#{Chef::Config[:node_name]}"
-    @email = options[:email]
-    @api_key = options[:api_key]
+    @email = options[:email] || "test@test.com"
+    @api_key = options[:api_key] || "asdfg"
   end
 
   def report
