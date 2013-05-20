@@ -16,7 +16,7 @@ describe LibratoReporting do
     librato.api_key.should == 'asdfg'
   end
 
-    it "API Key should return something" do
+  it "API Key should return something" do
     librato = LibratoReporting.new
     librato.api_key.should == 'asdfg'
   end
