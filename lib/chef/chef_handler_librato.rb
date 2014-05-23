@@ -16,21 +16,19 @@
 # limitations under the License.
 #
 
-
-require "rubygems"
+require 'rubygems'
 Gem.clear_paths
-require "librato/metrics"
-require "chef"
-require "chef/handler"
+require 'librato/metrics'
+require 'chef'
+require 'chef/handler'
 
 class LibratoReporting < Chef::Handler
   attr_accessor :metric_type, :source, :email, :api_key
 
   def initialize(options = {})
-    @metric_type = options[:metric_type] || "counter"
     @source = options[:source] || "#{Chef::Config[:node_name]}"
-    @email = options[:email] || "test@test.com"
-    @api_key = options[:api_key] || "asdfg"
+    @email = options[:email] || 'test@test.com'
+    @api_key = options[:api_key] || 'asdfg'
   end
 
   def report
@@ -44,27 +42,28 @@ class LibratoReporting < Chef::Handler
 
     Librato::Metrics.authenticate "#{@email}", "#{@api_key}"
 
-    metrics = Hash.new
-    metrics[:updated_resources] = run_status.updated_resources.length
-    metrics[:all_resources] = run_status.all_resources.length
-    metrics[:elapsed_time] = run_status.elapsed_time.to_i
+    metrics = {}
+    metrics[:guage][:updated_resources] = run_status.updated_resources.length
+    metrics[:guage][:all_resources] = run_status.all_resources.length
+    metrics[:guage][:elapsed_time] = run_status.elapsed_time.to_i
 
     if run_status.success?
-      metrics[:success] = 1
-      metrics[:fail] = 0
+      metrics[:counter][:success] = 1
+      metrics[:counter][:fail] = 0
     else
-      metrics[:success] = 0
-      metrics[:fail] = 1
+      metrics[:counter][:success] = 0
+      metrics[:counter][:fail] = 1
     end
 
-     
-      metrics.each do |metric, value|
+    metrics.each do |guage, data|
+      data.each do |metric, value|
         Chef::Log.debug("#{metric} #{value} #{Time.now}")
         begin
-        Librato::Metrics.submit :"#{metric}" => {:type => :"#{@metric_type}", :value => "#{value}", :source => "#{@source}" }
-        rescue Exception => e
-          puts "#{e}"
-  end
+          Librato::Metrics.submit :"#{metric}" => { type: :"#{guage}", value: "#{value}", source: "#{@source}" }
+          rescue => e
+            puts "#{e}"
+        end
       end
+    end
   end
 end
