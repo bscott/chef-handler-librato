@@ -43,6 +43,8 @@ class LibratoReporting < Chef::Handler
     Librato::Metrics.authenticate "#{@email}", "#{@api_key}"
 
     metrics = {}
+    metrics[:guage] = {}
+    metrics[:counter] = {}
     metrics[:guage][:updated_resources] = run_status.updated_resources.length
     metrics[:guage][:all_resources] = run_status.all_resources.length
     metrics[:guage][:elapsed_time] = run_status.elapsed_time.to_i
