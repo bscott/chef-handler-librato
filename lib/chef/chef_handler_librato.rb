@@ -43,11 +43,11 @@ class LibratoReporting < Chef::Handler
     Librato::Metrics.authenticate "#{@email}", "#{@api_key}"
 
     metrics = {}
-    metrics[:guage] = {}
+    metrics[:gauge] = {}
     metrics[:counter] = {}
-    metrics[:guage][:updated_resources] = run_status.updated_resources.length
-    metrics[:guage][:all_resources] = run_status.all_resources.length
-    metrics[:guage][:elapsed_time] = run_status.elapsed_time.to_i
+    metrics[:gauge][:updated_resources] = run_status.updated_resources.length
+    metrics[:gauge][:all_resources] = run_status.all_resources.length
+    metrics[:gauge][:elapsed_time] = run_status.elapsed_time.to_i
 
     if run_status.success?
       metrics[:counter][:success] = 1
@@ -57,7 +57,7 @@ class LibratoReporting < Chef::Handler
       metrics[:counter][:fail] = 1
     end
 
-    metrics.each do |guage, data|
+    metrics.each do |gauge, data|
       data.each do |metric, value|
         Chef::Log.debug("#{metric} #{value} #{Time.now}")
         begin
