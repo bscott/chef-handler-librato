@@ -49,22 +49,14 @@ class LibratoReporting < Chef::Handler
     metrics[:all_resources] = run_status.all_resources.length
     metrics[:elapsed_time] = run_status.elapsed_time.to_i
 
-    if run_status.success?
-      metrics[:success] = 1
-      metrics[:fail] = 0
-    else
-      metrics[:success] = 0
-      metrics[:fail] = 1
-    end
-
-     
-      metrics.each do |metric, value|
-        Chef::Log.debug("#{metric} #{value} #{Time.now}")
-        begin
-        Librato::Metrics.submit :"#{metric}" => {:type => :"#{@metric_type}", :value => "#{value}", :source => "#{@source}" }
-        rescue Exception => e
-          puts "#{e}"
-  end
+    metrics.each do |metric, value|
+      Chef::Log.debug("#{metric} #{value} #{Time.now}")
+      begin
+      Librato::Metrics.submit :"chef.#{metric}" => {:type => :"#{@metric_type}", :value => "#{value}", :source => "#{@source}" }
+      rescue Exception => e
+        puts "#{e}"
       end
+    end
   end
 end
+
