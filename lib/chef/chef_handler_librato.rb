@@ -58,14 +58,15 @@ class LibratoReporting < Chef::Handler
     end
 
     metrics.each do |gauge, data|
-      data.each do |metric, value|
-        Chef::Log.debug("#{metric} #{value} #{Time.now}")
-        begin
-          Librato::Metrics.submit :"#{metric}" => { type: :"#{guage}", value: "#{value}", source: "#{@source}" }
-          rescue => e
-            puts "#{e}"
+    metrics.each do |metric, value|
+      Chef::Log.debug("#{metric} #{value} #{Time.now}")
+      begin
+      Librato::Metrics.submit :"chef.#{metric}" => {:type => :"#{@metric_type}", :value => "#{value}", :source => "#{@source}" }
+      rescue Exception => e
+        puts "#{e}"
         end
       end
     end
   end
 end
+
