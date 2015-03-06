@@ -23,7 +23,7 @@ require 'chef'
 require 'chef/handler'
 
 class LibratoReporting < Chef::Handler
-  attr_accessor :metric_type, :source, :email, :api_key
+  attr_accessor :source, :email, :api_key
 
   def initialize(options = {})
     @source = options[:source] || "#{Chef::Config[:node_name]}"
@@ -57,13 +57,13 @@ class LibratoReporting < Chef::Handler
       metrics[:counter][:fail] = 1
     end
 
-    metrics.each do |gauge, data|
-    metrics.each do |metric, value|
-      Chef::Log.debug("#{metric} #{value} #{Time.now}")
-      begin
-      Librato::Metrics.submit :"chef.#{metric}" => {:type => :"#{@metric_type}", :value => "#{value}", :source => "#{@source}" }
-      rescue Exception => e
-        puts "#{e}"
+    metrics.each do |metric_type, data|
+      data.each do |metric, value|
+        Chef::Log.debug("#{metric} #{value} #{Time.now}")
+        begin
+        Librato::Metrics.submit :"chef.#{metric}" => {:type => :"#{metric_type}", :value => "#{value}", :source => "#{@source}" }
+        rescue Exception => e
+          puts "#{e}"
         end
       end
     end
