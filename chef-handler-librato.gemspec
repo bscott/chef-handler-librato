@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "chef-handler-librato"
-  s.version     = "1.1.6"
+  s.version     = "1.2.0"
   s.authors     = ["Brian Scott"]
   s.email       = ["brainscott@gmail.com"]
   s.homepage    = ""
@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-  s.add_development_dependency "librato-metrics"
   s.add_development_dependency "rspec"
   s.add_runtime_dependency "chef", '>= 0'
   s.add_runtime_dependency "aggregate", '>= 0'

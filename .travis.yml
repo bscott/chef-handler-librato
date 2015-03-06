@@ -4,8 +4,7 @@ language: ruby
 env:
   - CI=true
 rvm:
-  - 1.9.2
-  - 1.9.3
+  - 2.1.1
 gemfile:
   - Gemfile
 before_install:
