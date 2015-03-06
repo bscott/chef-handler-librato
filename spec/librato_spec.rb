@@ -5,7 +5,7 @@ describe LibratoReporting do
 
   it "Metric should return counter" do
     librato = LibratoReporting.new
-    librato.metric_type.should == 'counter'
+    librato.metric_type.should.in?(['counter','gauge'])
     librato.email.should == 'test@test.com'
     librato.api_key.should == 'asdfg'
   end
