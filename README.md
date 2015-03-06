@@ -8,6 +8,8 @@ chef-handler-librato
 
 Chef Handler to send metrics to Librato metrics!
 
+This fork integrates changes from [Pete Cheslock](https://github.com/petecheslock) and [Jesse Nelson](https://github.com/spheromak).
+
 ====Description====
 
 This is a simple Chef report handler that reports status of a Chef run through librato.
