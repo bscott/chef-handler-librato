@@ -2,13 +2,13 @@ chef-handler-librato
 
 ====================
 #### Build Status
-[![Build Status](https://travis-ci.org/bscott/chef-handler-librato.png?branch=master)](https://travis-ci.org/bscott/chef-handler-librato)
+[![Build Status](https://travis-ci.org/mjuarez/chef-handler-librato.svg)](https://travis-ci.org/mjuarez/chef-handler-librato)
 
 ====================
 
 Chef Handler to send metrics to Librato metrics!
 
-This fork integrates changes from [Pete Cheslock](https://github.com/petecheslock) and [Jesse Nelson](https://github.com/spheromak).
+This fork from [Brian Scott](https://github.com/bscott/chef-handler-librato) integrates changes from [Pete Cheslock](https://github.com/petecheslock) and [Jesse Nelson](https://github.com/spheromak).
 
 ====Description====
 
