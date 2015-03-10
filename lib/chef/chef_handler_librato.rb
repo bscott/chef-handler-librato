@@ -17,6 +17,7 @@
 #
 
 require 'rubygems'
+require 'date'
 Gem.clear_paths
 require 'librato/metrics'
 require 'chef'
@@ -49,6 +50,10 @@ class LibratoReporting < Chef::Handler
     metrics[:gauge][:all_resources] = run_status.all_resources.length
     metrics[:gauge][:elapsed_time] = run_status.elapsed_time.to_i
 
+    annotations = {}
+    annotations[:start_time] = run_status.start_time
+    annotations[:end_time] = run_status.end_time
+
     if run_status.success?
       metrics[:counter][:success] = 1
       metrics[:counter][:fail] = 0
@@ -67,6 +72,10 @@ class LibratoReporting < Chef::Handler
         end
       end
     end
+
+    Chef::Log.debug("Librato annotation chef.converge at #{annotations[:start_time]} - #{annotations[:end_time]}")
+    Librato::Metrics.annotate :"chef.converge", "Chef converge on #{@source}", :source => @source, :start_time => annotations[:start_time], :end_time => annotations[:end_time]
+
   end
 end
 
