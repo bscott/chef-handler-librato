@@ -43,6 +43,8 @@ class LibratoReporting < Chef::Handler
 
     Librato::Metrics.authenticate "#{@email}", "#{@api_key}"
 
+    Chef::Log.debug("#{gemspec.full_name} authenticated as #{@email}, #{@api_key}")
+
     metrics = {}
     metrics[:gauge] = {}
     metrics[:counter] = {}
@@ -64,7 +66,7 @@ class LibratoReporting < Chef::Handler
 
     metrics.each do |metric_type, data|
       data.each do |metric, value|
-        Chef::Log.debug("#{metric} #{value} #{Time.now}")
+        Chef::Log.debug("chef.#{metric} #{value} #{Time.now}")
         begin
         Librato::Metrics.submit :"chef.#{metric}" => {:type => :"#{metric_type}", :value => "#{value}", :source => "#{@source}" }
         rescue Exception => e
