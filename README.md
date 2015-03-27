@@ -2,13 +2,13 @@ chef-handler-librato
 
 ====================
 #### Build Status
-[![Build Status](https://travis-ci.org/bscott/chef-handler-librato.png?branch=master)](https://travis-ci.org/bscott/chef-handler-librato)
+[![Build Status](https://travis-ci.org/bscott/chef-handler-librato.svg)](https://travis-ci.org/bscott/chef-handler-librato)
 
 ====================
 
 Chef Handler to send metrics to Librato metrics!
 
-====Description====
+##Description
 
 This is a simple Chef report handler that reports status of a Chef run through librato.
 
@@ -34,10 +34,6 @@ Then add to the configuration (/etc/chef/solo.rb for chef-solo or /etc/chef/clie
 	librato_handler = LibratoReporting.new
 
 #### Arguments:
-
-#### metric_type is a string that sets the Metrics type in Librato, defaults to counter
-
-	librato_handler.metric_type = "gauge"
 
 #### Email and Api_key arguments
 
@@ -84,6 +80,12 @@ or
 
 Patches welcome, just send me a pull request!
 
-Author: Brian Scott (brainscott@gmail.com)
+Author:
 
+* Brian Scott (brainscott@gmail.com)
 
+Contributions:
+
+* [Pete Cheslock](https://github.com/petecheslock)
+* [Jesse Nelson](https://github.com/spheromak)
+* [Mike Juarez](https://github.com/mjuarez)
