@@ -51,8 +51,8 @@ class LibratoReporting < Chef::Handler
     metrics[:gauge][:elapsed_time] = run_status.elapsed_time.to_i
 
     annotations = {}
-    annotations[:start_time] = DateTime.parse(run_status.start_time).strftime('%s')
-    annotations[:end_time] = DateTime.parse(run_status.end_time).strftime('%s')
+    annotations[:start_time] = DateTime.parse(run_status.start_time.to_s).strftime('%s')
+    annotations[:end_time] = DateTime.parse(run_status.end_time.to_s).strftime('%s')
 
     if run_status.success?
       metrics[:counter][:success] = 1
