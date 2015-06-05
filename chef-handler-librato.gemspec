@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "chef-handler-librato"
-  s.version     = "1.2.0"
+  s.version     = "1.2.1"
   s.authors     = ["Brian Scott"]
   s.email       = ["brainscott@gmail.com"]
   s.homepage    = ""

@@ -43,6 +43,8 @@ class LibratoReporting < Chef::Handler
 
     Librato::Metrics.authenticate "#{@email}", "#{@api_key}"
 
+    Chef::Log.debug("#{gemspec.full_name} authenticated as #{@email}, #{@api_key}")
+
     metrics = {}
     metrics[:gauge] = {}
     metrics[:counter] = {}
@@ -51,8 +53,8 @@ class LibratoReporting < Chef::Handler
     metrics[:gauge][:elapsed_time] = run_status.elapsed_time.to_i
 
     annotations = {}
-    annotations[:start_time] = DateTime.parse(run_status.start_time).strftime('%s')
-    annotations[:end_time] = DateTime.parse(run_status.end_time).strftime('%s')
+    annotations[:start_time] = DateTime.parse(run_status.start_time.to_s).strftime('%s')
+    annotations[:end_time] = DateTime.parse(run_status.end_time.to_s).strftime('%s')
 
     if run_status.success?
       metrics[:counter][:success] = 1
@@ -64,7 +66,7 @@ class LibratoReporting < Chef::Handler
 
     metrics.each do |metric_type, data|
       data.each do |metric, value|
-        Chef::Log.debug("#{metric} #{value} #{Time.now}")
+        Chef::Log.debug("chef.#{metric} #{value} #{Time.now}")
         begin
         Librato::Metrics.submit :"chef.#{metric}" => {:type => :"#{metric_type}", :value => "#{value}", :source => "#{@source}" }
         rescue Exception => e
