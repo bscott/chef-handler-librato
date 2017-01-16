@@ -71,8 +71,7 @@ or
 	
 
 	chef_handler "LibratoReporting" do
-		source "#{File.join(Gem.all_load_paths.grep(/chef-handler-librato/).first,'chef', 
-  		'chef_handler_librato.rb')}"
+		 source Gem.find_files.(chef/chef_handler_librato).first
  		 arguments argument_array
   		 action :nothing
 	end.run_action(:enable)
